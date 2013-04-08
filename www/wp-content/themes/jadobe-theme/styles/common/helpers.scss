@@ -1,0 +1,20 @@
+//=============================================================================
+// Common Helpers
+//=============================================================================
+.clear{clear: both;}
+[reveal]{opacity: 0;}
+.pull-right{float: right; @include clearfix;}
+.pull-left{float: left; @include clearfix;}
+.align-left{text-align: left;}
+.align-center{text-align: center;}
+
+//=============================================================================
+// No Styles 
+//=============================================================================
+a.nostyle, a.nostyle:hover{border: none;}
+
+h2.nostyle{
+	color: $color;
+	font-weight: 300;
+	&:hover{color: $color-hover;}
+}
