@@ -1,0 +1,23 @@
+.group-comment{
+	@include clearfix;
+	> aside{
+		float: left;
+		width: $groupLeft;
+	}
+	> div{
+		float: left;
+		width: $groupRight - 10px;
+		padding-left: 10px;
+
+		& div, p{
+			font-size: 15px;
+			line-height: 22px;
+		}
+	}
+}
+.group-generic{
+	> .comment-header{
+		img{float: left; margin-right: 20px;}
+		line-height: 96px;
+	}
+}

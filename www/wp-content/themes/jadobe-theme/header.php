@@ -30,7 +30,7 @@
 		<?php //=======================================================================
 		// Header
 		//========================================================================*/ ?>
-		<header>
+		<header class="main">
 			<div>
 				<menu>
 					<a class="nostyle" href="<?php bloginfo('url');?>/"><img src="<?php bloginfo('template_directory');?>/img/logo-menu.png" alt="Home"></a>

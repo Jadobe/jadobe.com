@@ -44,10 +44,10 @@ form{
 		&.chosen{margin-bottom: 6px;}
 
 		@include clearfix;
-		label{width: $gridStd * .25}
-		input, [rel="preview"], textarea{width: $gridStd * .75 - 10}
+		label{width: $groupLeft}
+		input, [rel="preview"], textarea{width: $groupRight - 10}
 		select{
-			width: $gridStd * .75 - 2;
+			width: $groupRight - 2;
 			max-height: 200px;
 		}
 		label, input, select, [rel="preview"]{
@@ -59,6 +59,7 @@ form{
 			height: 100px;
 			font-size: 14px;
 			line-height: 21px;
+			max-width: $groupRight - 10;
 		}
 		[rel="preview"]{
 			padding: 10px 4px;
@@ -69,7 +70,7 @@ form{
 		// Chosen Library
 		//=============================================================================
 		.chzn-container-multi{
-			width: $gridStd * .75 !important;
+			width: $groupRight !important;
 			font-size: 14px;
 			.chzn-choices{
 				background: #fff;
@@ -85,7 +86,7 @@ form{
 				height: 30px;
 			}
 			.chzn-drop{
-				width: $gridStd * .75 - 2 !important;
+				width: $groupRight - 2 !important;
 			}
 			.search-choice{margin-top: 5px;}
 		}

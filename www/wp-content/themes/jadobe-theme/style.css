@@ -640,6 +640,20 @@ table {
     background-repeat: no-repeat !important;
     background-size: 52px 37px !important; } }
 /* @end */
+.group-generic {
+  *zoom: 1; }
+  .group-generic:before, .group-generic:after {
+    content: " ";
+    display: table; }
+  .group-generic:after {
+    clear: both; }
+  .group-generic > aside {
+    float: left;
+    width: 175px; }
+  .group-generic > div {
+    float: left;
+    width: 525px; }
+
 .clear {
   clear: both; }
 
@@ -838,43 +852,43 @@ p {
   to {
     opacity: 1; } }
 
-header {
+header.main {
   *zoom: 1;
   position: fixed;
   width: 100%;
   top: 0;
   background: #fff;
   z-index: 1000; }
-  header:before, header:after {
+  header.main:before, header.main:after {
     content: " ";
     display: table; }
-  header:after {
+  header.main:after {
     clear: both; }
-  header div {
+  header.main div {
     *zoom: 1;
     width: 700px;
     margin: auto;
     border-bottom: 1px solid #efefef; }
-    header div:before, header div:after {
+    header.main div:before, header.main div:after {
       content: " ";
       display: table; }
-    header div:after {
+    header.main div:after {
       clear: both; }
-    header div menu {
+    header.main div menu {
       float: right;
       width: 700px;
       padding: 0; }
-      header div menu a {
+      header.main div menu a {
         position: relative;
         font-size: 14px;
         margin-right: 20px; }
-        header div menu a.last {
+        header.main div menu a.last {
           margin-right: 0;
           float: right; }
-        header div menu a img {
+        header.main div menu a img {
           position: relative;
           top: 6px; }
-        header div menu a:hover {
+        header.main div menu a:hover {
           color: #c53017; }
 
 form {
@@ -967,7 +981,8 @@ form {
     form .group textarea {
       height: 100px;
       font-size: 14px;
-      line-height: 21px; }
+      line-height: 21px;
+      max-width: 515px; }
     form .group [rel="preview"] {
       padding: 10px 4px;
       border: 1px dashed #aaaaaa; }
@@ -998,6 +1013,30 @@ form {
       border: 1px solid #222222 !important; }
     form .group .chzn-container-active .search-field input {
       color: #333333 !important; }
+
+.group-comment {
+  *zoom: 1; }
+  .group-comment:before, .group-comment:after {
+    content: " ";
+    display: table; }
+  .group-comment:after {
+    clear: both; }
+  .group-comment > aside {
+    float: left;
+    width: 175px; }
+  .group-comment > div {
+    float: left;
+    width: 515px;
+    padding-left: 10px; }
+    .group-comment > div div, .group-comment > div p {
+      font-size: 15px;
+      line-height: 22px; }
+
+.group-generic > .comment-header {
+  line-height: 96px; }
+  .group-generic > .comment-header img {
+    float: left;
+    margin-right: 20px; }
 
 footer {
   width: 700px;

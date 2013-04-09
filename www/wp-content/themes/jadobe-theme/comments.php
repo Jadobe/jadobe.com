@@ -19,6 +19,59 @@
 	}
 
 	//=============================================================================
+	// Comment Form
+	//=============================================================================
+	if(comments_open()){
+		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		// Requires registration, but not logged in
+		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		if(get_option('comment_registration') && !$user_ID){
+			echo '<p><i>Sorry, you need to <a href="'.wp_login_url(get_permalink()).'">log in</a> to comment.</i></p>';
+		} else {
+			echo '<form action="' . get_bloginfo('url') . '/wp-comments-post.php" method="post" id="commentform">';
+				//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				// Show the standard comment form
+				//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				if($user_ID): global $current_user; ?>
+					<div class="group-generic">
+						<aside><?php _e('Logged in as'); ?></aside>
+						<div class="comment-header">
+							<a href="<?php bloginfo('url') ?>/wp-admin/profile.php"><?php echo $user_identity; ?> <?php echo get_avatar($current_user->ID, 96) ?></a>							
+						</div>
+					</div>
+					<br>
+				<?php //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				// Not logged in, so ask for email and website
+				//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				else : ?>
+					<div class="group">
+						<label for="author"><?php _e('Name'); ?></label>
+						<input type="text" id="author" name="author" value="<?php echo $comment_author ?>">
+					</div>
+					<div class="group">
+						<label for="email"><?php _e('Mail <small>(not published)</small>'); ?></label>
+						<input type="text" id="email" name="email" value="<?php echo $comment_author_email ?>">
+					</div>					
+					<div class="group">
+						<label for="url"><?php _e('Website'); ?></label>
+						<input type="text" id="url" name="url" value="<?php echo $comment_author_url ?>">
+					</div>
+				<?php endif;?>
+
+				<div class="group">
+					<label for="comment"><?php _e('Comment'); ?></label>
+					<textarea name="comment" id="comment"></textarea>
+				</div>
+				<input type="submit" id="submit" value="<?php _e('Submit Comment'); ?>">
+				<?php comment_id_fields($post->ID); do_action('comment_form', $post->ID); ?>
+			<?php echo '</form>';
+		}
+	} else {
+		echo '<p><i>Sorry, comments have been closed. Please send me a <a href="http://twitter.com/thejadobe" target="_blank">Tweet</a> if you\'d like to reopen the discussion!</i></p>';
+	}
+	echo '<hr>';
+
+	//=============================================================================
 	// Display Comments
 	//=============================================================================
 	if($comments){
@@ -32,38 +85,40 @@
 			// Display Comment
 			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			} else {
-				ppr($comment);
-			}
+				//=============================================================================
+				// Get Comment User Meta
+				//=============================================================================
+				if($user = get_user_by('email', $comment->comment_author_email)){
+					$userUrl = '<a href="' . str_replace('jadobe.com', $user->data->user_nicename . '.jadobe.com', get_bloginfo('url')) . '">' . $user->data->display_name . '</a>';
+				} else {
+					if($comment->comment_author_url) $userUrl = '<a href="' . $comment->comment_author_url . '">'.$comment->comment_author.'</a>';
+					else $userUrl = $comment->comment_author;
+				}
+				//=============================================================================
+				// Create the comment
+				//=============================================================================
+			?>
+				<div class="group-comment" id="comment-<?php echo $comment->comment_ID ?>">
+					<aside>
+						<p class="align-center">
+							<?php echo get_avatar($comment->user_id, 96) ?>
+							<br><?php echo $userUrl ?> 
+							<br><?php echo date('d, F Y', strtotime($comment->comment_date)) ?>
+						</p>
+					</aside>
+					<div>
+						<p>
+							<?php echo htmlspecialchars($comment->comment_content); ?>
+						</p>
+						<p><?php comment_reply_link(array('respond_id' => 'commentform', 'add_below' => 'comment', 'depth' => 1, 'max_depth' => 3), $comment->comment_ID) ?></p>
+					</div>
+				</div>
+			<?php }
 		}
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	// No Comments
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	} else {
 		echo '<p><i>'.__('No one has commented yet. Be the first!').'</i></p>';
-	}
-
-	//=============================================================================
-	// Comment Form
-	//=============================================================================
-	if(comments_open()){
-		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		// Requires registration, but not logged in
-		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		if(get_option('comment_registration') && !$user_ID){
-			echo '<p><i>Sorry, you need to <a href="'.wp_login_url(get_permalink()).'">log in</a> to comment.</i></p>';
-		} else {
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			// Show the standard comment form
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			if($user_ID){
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			// Not logged in, so ask for email and website
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			}else{
-
-			}
-		}
-	} else {
-		echo '<p><i>Sorry, comments have been closed. Please send me a <a href="http://twitter.com/thejadobe" target="_blank">Tweet</a> if you\'d like to reopen the discussion!</i></p>';
 	}
 ?>
