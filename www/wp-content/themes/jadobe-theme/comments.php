@@ -64,6 +64,7 @@
 				</div>
 				<input type="submit" id="submit" value="<?php _e('Submit Comment'); ?>">
 				<?php comment_id_fields($post->ID); do_action('comment_form', $post->ID); ?>
+				<?php cancel_comment_reply_link(__('Cancel Repy')); ?>
 			<?php echo '</form>';
 		}
 	} else {
@@ -75,50 +76,63 @@
 	// Display Comments
 	//=============================================================================
 	if($comments){
-		foreach($comments as $comment){
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			// Comment is awaiting moderation
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			if($comment->comment_approved == '0'){
-				echo '<p><b>' . __('Your comment is awaiting approval.') . '</b></p>';
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			// Display Comment
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			} else {
-				//=============================================================================
-				// Get Comment User Meta
-				//=============================================================================
-				if($user = get_user_by('email', $comment->comment_author_email)){
-					$userUrl = '<a href="' . str_replace('jadobe.com', $user->data->user_nicename . '.jadobe.com', get_bloginfo('url')) . '">' . $user->data->display_name . '</a>';
-				} else {
-					if($comment->comment_author_url) $userUrl = '<a href="' . $comment->comment_author_url . '">'.$comment->comment_author.'</a>';
-					else $userUrl = $comment->comment_author;
-				}
-				//=============================================================================
-				// Create the comment
-				//=============================================================================
-			?>
-				<div class="group-comment" id="comment-<?php echo $comment->comment_ID ?>">
-					<aside>
-						<p class="align-center">
-							<?php echo get_avatar($comment->user_id, 96) ?>
-							<br><?php echo $userUrl ?> 
-							<br><?php echo date('d, F Y', strtotime($comment->comment_date)) ?>
-						</p>
-					</aside>
-					<div>
-						<p>
-							<?php echo htmlspecialchars($comment->comment_content); ?>
-						</p>
-						<p><?php comment_reply_link(array('respond_id' => 'commentform', 'add_below' => 'comment', 'depth' => 1, 'max_depth' => 3), $comment->comment_ID) ?></p>
-					</div>
-				</div>
-			<?php }
-		}
+		wp_list_comments(array(
+			'callback'		=> 'custom_comment_callback',
+			'end-callback'	=> '__return_false',
+			'style'			=> 'div',
+			'avatar_size'	=> 96
+		));
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	// No Comments
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	} else {
 		echo '<p><i>'.__('No one has commented yet. Be the first!').'</i></p>';
+	}
+
+
+	//###########################################################################
+	// Custom Callback for the comments
+	//###########################################################################
+	function custom_comment_callback($comment, $args, $depth){
+		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		// Comment is awaiting moderation
+		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		global $post;
+
+		if($comment->comment_approved == '0'){
+			echo '<p><b>' . __('Your comment is awaiting approval.') . '</b></p>';
+		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		// Display Comment
+		//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		} else {
+			//=============================================================================
+			// Get Comment User Meta
+			//=============================================================================
+			if($user = get_user_by('email', $comment->comment_author_email)){
+				$userUrl = '<a href="' . str_replace('jadobe.com', $user->data->user_nicename . '.jadobe.com', get_bloginfo('url')) . '">' . $user->data->display_name . '</a>';
+			} else {
+				if($comment->comment_author_url) $userUrl = '<a href="' . $comment->comment_author_url . '">'.$comment->comment_author.'</a>';
+				else $userUrl = $comment->comment_author;
+			}
+			//=============================================================================
+			// Create the comment
+			//=============================================================================
+		?>
+			<div class="group-comment depth-<?php echo min($depth-1, 2) ?> <?php if($post->post_author === $comment->user_id) echo 'author' ?>" id="comment-<?php echo $comment->comment_ID ?>">
+				<aside>
+					<p class="align-center">
+						<?php echo get_avatar($comment->user_id, $args['avatar_size']) ?>
+						<br><?php echo $userUrl ?> 
+						<br><?php echo date('d, F Y', strtotime($comment->comment_date)) ?>
+					</p>
+				</aside>
+				<div>
+					<p>
+						<?php echo htmlspecialchars($comment->comment_content); ?>
+					</p>
+					<p><?php comment_reply_link(array('respond_id' => 'commentform', 'add_below' => 'comment', 'depth' => 1, 'max_depth' => 3), $comment->comment_ID) ?></p>
+				</div>
+			</div>
+		<?php }
 	}
 ?>

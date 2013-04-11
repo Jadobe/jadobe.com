@@ -17,7 +17,7 @@
 		wp_enqueue_script('jQuery');
 		wp_enqueue_script('plugins', get_bloginfo('template_directory') . '/js/plugins.js' );
 		wp_enqueue_script('main', get_bloginfo('template_directory') . '/js/main.js');
-		if(get_option('thread_comments')) wp_enqueue_script('comment-reply');
+		if(get_option('thread_comments') && is_singular() && comments_open()) wp_enqueue_script('comment-reply');
 	}
 
 	//###########################################################################

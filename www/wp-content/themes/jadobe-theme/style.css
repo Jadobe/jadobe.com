@@ -705,7 +705,6 @@ a {
   font-family: "Open Sans", sans-serif;
   color: #eb6c57;
   text-decoration: none;
-  border-top: 1px solid #fff;
   -webkit-transition: color 0.25s ease-in 0s;
   -moz-transition: color 0.25s ease-in 0s;
   -ms-transition: color 0.25s ease-in 0s;
@@ -1031,12 +1030,101 @@ form {
     .group-comment > div div, .group-comment > div p {
       font-size: 15px;
       line-height: 22px; }
+  .group-comment.author {
+    background: #efefef; }
+  .group-comment.depth-1 {
+    margin-left: 50px; }
+    .group-comment.depth-1 > div {
+      width: 465px; }
+  .group-comment.depth-2 {
+    margin-left: 100px; }
+    .group-comment.depth-2 > div {
+      width: 415px; }
+  .group-comment.depth-3 {
+    margin-left: 150px; }
+    .group-comment.depth-3 > div {
+      width: 365px; }
 
 .group-generic > .comment-header {
   line-height: 96px; }
   .group-generic > .comment-header img {
     float: left;
     margin-right: 20px; }
+
+#commentform #cancel-comment-reply-link {
+  float: right;
+  margin-right: 20px;
+  border: 1px solid #b9b9b9;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 white;
+  color: #333333;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: #dddddd;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dddddd), color-stop(100%, #c1c1c1));
+  background-image: -webkit-linear-gradient(top, #dddddd, #c1c1c1);
+  background-image: -moz-linear-gradient(top, #dddddd, #c1c1c1);
+  background-image: -ms-linear-gradient(top, #dddddd, #c1c1c1);
+  background-image: -o-linear-gradient(top, #dddddd, #c1c1c1);
+  background-image: linear-gradient(top, #dddddd, #c1c1c1);
+  padding: 7px 18px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #e7e7e7;
+  -webkit-background-clip: padding-box;
+  padding: 0 16px; }
+  #commentform #cancel-comment-reply-link:hover:not(:disabled) {
+    box-shadow: inset 0 1px 0 0 #eaeaea;
+    cursor: pointer;
+    background-color: #d0d0d0;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d0d0d0), color-stop(100%, #b9b9b9));
+    background-image: -webkit-linear-gradient(top, #d0d0d0, #b9b9b9);
+    background-image: -moz-linear-gradient(top, #d0d0d0, #b9b9b9);
+    background-image: -ms-linear-gradient(top, #d0d0d0, #b9b9b9);
+    background-image: -o-linear-gradient(top, #d0d0d0, #b9b9b9);
+    background-image: linear-gradient(top, #d0d0d0, #b9b9b9); }
+  #commentform #cancel-comment-reply-link:active:not(:disabled) {
+    border: 1px solid #b9b9b9;
+    box-shadow: inset 0 0 8px 4px #b2b2b2, inset 0 0 8px 4px #b2b2b2, 0 1px 1px 0 #eeeeee; }
+  #commentform #cancel-comment-reply-link:disabled {
+    opacity: 0.5;
+    cursor: not-allowed; }
+#commentform #submit {
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 white;
+  color: #333333;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: white;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #e3e3e3));
+  background-image: -webkit-linear-gradient(top, white, #e3e3e3);
+  background-image: -moz-linear-gradient(top, white, #e3e3e3);
+  background-image: -ms-linear-gradient(top, white, #e3e3e3);
+  background-image: -o-linear-gradient(top, white, #e3e3e3);
+  background-image: linear-gradient(top, white, #e3e3e3);
+  padding: 7px 18px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 white;
+  -webkit-background-clip: padding-box;
+  padding: 0 16px; }
+  #commentform #submit:hover:not(:disabled) {
+    box-shadow: inset 0 1px 0 0 white;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f2f2), color-stop(100%, #dbdbdb));
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #dbdbdb);
+    background-image: -moz-linear-gradient(top, #f2f2f2, #dbdbdb);
+    background-image: -ms-linear-gradient(top, #f2f2f2, #dbdbdb);
+    background-image: -o-linear-gradient(top, #f2f2f2, #dbdbdb);
+    background-image: linear-gradient(top, #f2f2f2, #dbdbdb); }
+  #commentform #submit:active:not(:disabled) {
+    border: 1px solid #dbdbdb;
+    box-shadow: inset 0 0 8px 4px #d4d4d4, inset 0 0 8px 4px #d4d4d4, 0 1px 1px 0 #eeeeee; }
+  #commentform #submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed; }
 
 footer {
   width: 700px;

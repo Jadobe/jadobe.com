@@ -14,10 +14,45 @@
 			line-height: 22px;
 		}
 	}
+	&.author{
+		background: $colorGhost;
+	}
+
+	//=============================================================================
+	// Depth
+	//=============================================================================
+	&.depth-1{
+		margin-left: 50px;
+		> div{width: $groupRight - 60px}
+	}
+	&.depth-2{
+		margin-left: 100px;
+		> div{width: $groupRight - 110px}
+	}
+	&.depth-3{
+		margin-left: 150px;
+		> div{width: $groupRight - 160px}
+	}
 }
 .group-generic{
 	> .comment-header{
 		img{float: left; margin-right: 20px;}
 		line-height: 96px;
+	}
+}
+
+//=============================================================================
+// Comment Form
+//=============================================================================
+#commentform{
+	#cancel-comment-reply-link{
+		float: right;
+		margin-right: 20px;
+		@include button(#ddd);
+		padding: 0 16px;
+	}
+	#submit{		
+		@include button(#fff);
+		padding: 0 16px;
 	}
 }
