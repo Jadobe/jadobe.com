@@ -52,10 +52,6 @@
 						<label for="email"><?php _e('Mail <small>(not published)</small>'); ?></label>
 						<input type="text" id="email" name="email" value="<?php echo $comment_author_email ?>">
 					</div>					
-					<div class="group">
-						<label for="url"><?php _e('Website'); ?></label>
-						<input type="text" id="url" name="url" value="<?php echo $comment_author_url ?>">
-					</div>
 				<?php endif;?>
 
 				<div class="group">
@@ -80,7 +76,7 @@
 			'callback'		=> 'custom_comment_callback',
 			'end-callback'	=> '__return_false',
 			'style'			=> 'div',
-			'avatar_size'	=> 96
+			'avatar_size'	=> 64
 		));
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	// No Comments
@@ -111,26 +107,25 @@
 			if($user = get_user_by('email', $comment->comment_author_email)){
 				$userUrl = '<a href="' . str_replace('jadobe.com', $user->data->user_nicename . '.jadobe.com', get_bloginfo('url')) . '">' . $user->data->display_name . '</a>';
 			} else {
-				if($comment->comment_author_url) $userUrl = '<a href="' . $comment->comment_author_url . '">'.$comment->comment_author.'</a>';
-				else $userUrl = $comment->comment_author;
+				$userUrl = $comment->comment_author;
 			}
 			//=============================================================================
 			// Create the comment
 			//=============================================================================
 		?>
-			<div class="group-comment depth-<?php echo min($depth-1, 2) ?> <?php if($post->post_author === $comment->user_id) echo 'author' ?>" id="comment-<?php echo $comment->comment_ID ?>">
+			<div class="group-comment depth-<?php echo min($depth-1, 3) ?> <?php if($post->post_author === $comment->user_id) echo 'author' ?>" id="comment-<?php echo $comment->comment_ID ?>">
 				<aside>
-					<p class="align-center">
+					<p>
 						<?php echo get_avatar($comment->user_id, $args['avatar_size']) ?>
-						<br><?php echo $userUrl ?> 
-						<br><?php echo date('d, F Y', strtotime($comment->comment_date)) ?>
+						<span class="author"><?php echo $userUrl ?></span>
+						<span class="date"><?php echo date('d, F Y', strtotime($comment->comment_date)) ?></span>
 					</p>
 				</aside>
 				<div>
 					<p>
 						<?php echo htmlspecialchars($comment->comment_content); ?>
 					</p>
-					<p><?php comment_reply_link(array('respond_id' => 'commentform', 'add_below' => 'comment', 'depth' => 1, 'max_depth' => 3), $comment->comment_ID) ?></p>
+					<p class="align-right"><?php comment_reply_link(array('respond_id' => 'commentform', 'add_below' => 'comment', 'depth' => 1, 'max_depth' => 3), $comment->comment_ID) ?></p>
 				</div>
 			</div>
 		<?php }

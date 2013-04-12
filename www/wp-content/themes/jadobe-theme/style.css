@@ -684,6 +684,9 @@ table {
 .align-center {
   text-align: center; }
 
+.align-right {
+  text-align: right; }
+
 a.nostyle, a.nostyle:hover {
   border: none; }
 
@@ -1020,36 +1023,38 @@ form {
     display: table; }
   .group-comment:after {
     clear: both; }
-  .group-comment > aside {
-    float: left;
-    width: 175px; }
+  .group-comment > aside .avatar {
+    border-radius: 64px;
+    position: relative;
+    top: 24px; }
+  .group-comment > aside .author {
+    font-size: 32px;
+    margin-left: 12px;
+    margin-right: 12px;
+    line-height: 48px; }
+  .group-comment > aside .date {
+    font-size: 12px; }
   .group-comment > div {
-    float: left;
-    width: 515px;
-    padding-left: 10px; }
+    padding: 4px 32px;
+    border: 1px solid #ddd; }
     .group-comment > div div, .group-comment > div p {
       font-size: 15px;
       line-height: 22px; }
-  .group-comment.author {
-    background: #efefef; }
+  .group-comment.author > div {
+    border: 1px solid #f7c4bb;
+    background: #fdf4f2; }
   .group-comment.depth-1 {
-    margin-left: 50px; }
-    .group-comment.depth-1 > div {
-      width: 465px; }
+    padding-left: 25px;
+    margin-left: 25px;
+    border-left: 1px solid #ddd; }
   .group-comment.depth-2 {
-    margin-left: 100px; }
-    .group-comment.depth-2 > div {
-      width: 415px; }
+    padding-left: 50px;
+    margin-left: 50px;
+    border-left: 1px solid #ddd; }
   .group-comment.depth-3 {
-    margin-left: 150px; }
-    .group-comment.depth-3 > div {
-      width: 365px; }
-
-.group-generic > .comment-header {
-  line-height: 96px; }
-  .group-generic > .comment-header img {
-    float: left;
-    margin-right: 20px; }
+    padding-left: 100px;
+    margin-left: 100px;
+    border-left: 1px solid #ddd; }
 
 #commentform #cancel-comment-reply-link {
   float: right;
@@ -1125,6 +1130,14 @@ form {
   #commentform #submit:disabled {
     opacity: 0.5;
     cursor: not-allowed; }
+#commentform .avatar {
+  border-radius: 64px; }
+#commentform .comment-header {
+  line-height: 96px;
+  font-size: 48px; }
+  #commentform .comment-header img {
+    float: left;
+    margin-right: 20px; }
 
 footer {
   width: 700px;

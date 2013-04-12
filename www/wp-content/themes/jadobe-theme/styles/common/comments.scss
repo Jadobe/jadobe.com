@@ -1,43 +1,54 @@
 .group-comment{
 	@include clearfix;
+	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// Post Meta
+	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	> aside{
-		float: left;
-		width: $groupLeft;
+		.avatar{
+			border-radius: 64px;
+			position: relative;
+			top: 24px;
+		}
+		.author{
+			font-size: 32px;
+			margin-left: 12px;
+			margin-right: 12px;
+			line-height: 48px;
+		}
+		.date{
+			font-size: 12px;
+		}
 	}
 	> div{
-		float: left;
-		width: $groupRight - 10px;
-		padding-left: 10px;
-
+		padding: 4px 32px;
+		border: 1px solid #ddd;
 		& div, p{
 			font-size: 15px;
 			line-height: 22px;
 		}
 	}
-	&.author{
-		background: $colorGhost;
+	&.author > div{
+		border: 1px solid tint($red, 60%);
+		background: lighten($red, 34%);
 	}
 
 	//=============================================================================
 	// Depth
 	//=============================================================================
 	&.depth-1{
-		margin-left: 50px;
-		> div{width: $groupRight - 60px}
+		padding-left: 25px;
+		margin-left: 25px;
+		border-left: 1px solid #ddd;
 	}
 	&.depth-2{
-		margin-left: 100px;
-		> div{width: $groupRight - 110px}
+		padding-left: 50px;
+		margin-left: 50px;
+		border-left: 1px solid #ddd;
 	}
 	&.depth-3{
-		margin-left: 150px;
-		> div{width: $groupRight - 160px}
-	}
-}
-.group-generic{
-	> .comment-header{
-		img{float: left; margin-right: 20px;}
-		line-height: 96px;
+		padding-left: 100px;
+		margin-left: 100px;
+		border-left: 1px solid #ddd;
 	}
 }
 
@@ -54,5 +65,11 @@
 	#submit{		
 		@include button(#fff);
 		padding: 0 16px;
+	}
+	.avatar{border-radius: 64px;}
+	.comment-header{
+		img{float: left; margin-right: 20px;}
+		line-height: 96px;
+		font-size: 48px;
 	}
 }
